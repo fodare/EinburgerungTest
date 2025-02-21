@@ -17,48 +17,13 @@ namespace Einburgerung.Model
 
     public class Translation
     {
-        public EN? EN { get; set; }
-        public TR? TR { get; set; }
-        public RU? RU { get; set; }
-        public FR? FR { get; set; }
-        public AR? AR { get; set; }
-        public UK? UK { get; set; }
-        public HI? HI { get; set; }
-    }
-
-    public class EN : BaseQuestion
-    {
-        public BaseQuestion? BaseQuestion { get; set; }
-    }
-
-    public class TR : BaseQuestion
-    {
-        public BaseQuestion? BaseQuestion { get; set; }
-    }
-
-    public class RU : BaseQuestion
-    {
-        public BaseQuestion? BaseQuestion { get; set; }
-    }
-
-    public class FR : BaseQuestion
-    {
-        public BaseQuestion? BaseQuestion { get; set; }
-    }
-
-    public class AR : BaseQuestion
-    {
-        public BaseQuestion? BaseQuestion { get; set; }
-    }
-
-    public class UK : BaseQuestion
-    {
-        public BaseQuestion? BaseQuestion { get; set; }
-    }
-
-    public class HI : BaseQuestion
-    {
-        public BaseQuestion? BaseQuestion { get; set; }
+        public BaseQuestion? EN { get; set; }
+        public BaseQuestion? TR { get; set; }
+        public BaseQuestion? RU { get; set; }
+        public BaseQuestion? FR { get; set; }
+        public BaseQuestion? AR { get; set; }
+        public BaseQuestion? UK { get; set; }
+        public BaseQuestion? HI { get; set; }
     }
 
     public class BaseQuestion
