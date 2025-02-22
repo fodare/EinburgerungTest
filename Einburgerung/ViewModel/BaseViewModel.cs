@@ -9,7 +9,7 @@ namespace Einburgerung.ViewModel
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotBusy))]
-        private bool isBusy;
+        private bool isBusy = false;
 
         public bool IsNotBusy => !IsBusy;
     }
