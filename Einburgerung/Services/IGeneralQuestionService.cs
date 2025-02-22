@@ -4,7 +4,8 @@ namespace Einburgerung.Services
 {
     public interface IGeneralQuestionService
     {
-        Task<List<QuestionModel>> GetGeneralQuestions();
-        Task<QuestionModel> GetGeneralQuestionById(int questionId);
+        Task<List<QuestionModel>> GetGeneralQuestionsAsync();
+        Task<QuestionModel> GetGeneralQuestionByIdAsync(int questionId);
+        List<QuestionModel> GetGeneralQuestions();
     }
 }

@@ -11,14 +11,20 @@ namespace Einburgerung.Services
             _questionReader = questionReader;
         }
 
-        public Task<QuestionModel> GetGeneralQuestionById(int questionId)
+        public Task<QuestionModel> GetGeneralQuestionByIdAsync(int questionId)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<QuestionModel>> GetGeneralQuestions()
+        public async Task<List<QuestionModel>> GetGeneralQuestionsAsync()
         {
             return await _questionReader.ReadGeneralQuestions();
+        }
+
+        public List<QuestionModel> GetGeneralQuestions()
+        {
+            var questionsList = _questionReader.ReadGeneralQuestions();
+            return questionsList.Result;
         }
     }
 }
