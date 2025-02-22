@@ -86,9 +86,16 @@ namespace Einburgerung.ViewModel
             {
                 IsBusy = true;
                 Debug.WriteLine($"Selected option: {selectedOption}");
+                // if (selectedOption == CurrentQuestion!.Solution)
+                // {
+                //     return;
+                // }
+                // else
+                // {
+                //     return;
+                // }
                 // QuestionsList?.Remove(question)
                 NextQuestion();
-
             }
             catch (System.Exception exp)
             {
