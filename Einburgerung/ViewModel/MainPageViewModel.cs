@@ -10,14 +10,16 @@ namespace Einburgerung.ViewModel
     public partial class MainPageViewModel : BaseViewModel
     {
         private readonly IGeneralQuestionService _generalQuestionService;
+        private readonly NotificationService _notificationService;
         public ObservableCollection<QuestionModel> QuestionsList { get; } = new();
 
         [ObservableProperty]
         public QuestionModel? currentQuestion;
 
-        public MainPageViewModel(IGeneralQuestionService generalQuestionService)
+        public MainPageViewModel(IGeneralQuestionService generalQuestionService, NotificationService notificationService)
         {
             _generalQuestionService = generalQuestionService;
+            _notificationService = notificationService;
             Title = "GenralQuestions";
             InitializeCurrentQuestion();
         }
@@ -85,20 +87,20 @@ namespace Einburgerung.ViewModel
             try
             {
                 IsBusy = true;
-                Debug.WriteLine($"Selected option: {selectedOption}");
-                // if (selectedOption == CurrentQuestion!.Solution)
-                // {
-                //     return;
-                // }
-                // else
-                // {
-                //     return;
-                // }
-                // QuestionsList?.Remove(question)
+                if (selectedOption == CurrentQuestion!.Solution)
+                {
+                    await _notificationService.SnakbarNotification("Correct!");
+                }
+                else
+                {
+                    await _notificationService.SnakbarNotification("Wrong!");
+                }
+
                 NextQuestion();
             }
             catch (System.Exception exp)
             {
+                await _notificationService.SnakbarNotification("Error validating selection!");
                 Debug.WriteLine($"Error. {exp.Message}");
             }
             finally
