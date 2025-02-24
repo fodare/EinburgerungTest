@@ -18,13 +18,14 @@ namespace Einburgerung.Services
 
         public async Task<List<QuestionModel>> GetGeneralQuestionsAsync()
         {
-            return await _questionReader.ReadGeneralQuestions();
+            var questionsList = await _questionReader.ReadGeneralQuestions();
+            return [.. questionsList.Where(question => question != null)];
         }
 
         public List<QuestionModel> GetGeneralQuestions()
         {
             var questionsList = _questionReader.ReadGeneralQuestions();
-            return questionsList.Result;
+            return [.. questionsList.Result.Where(question => question != null)];
         }
     }
 }
