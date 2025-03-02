@@ -25,6 +25,9 @@ namespace Einburgerung
 
 			builder.Services.AddSingleton<StateQuestionsPage>();
 			builder.Services.AddSingleton<StateQuestionsViewModel>();
+
+			builder.Services.AddSingleton<IStateQuestionService, StateQuestionService>();
+
 #if DEBUG
 			builder.Logging.AddDebug();
 #endif
