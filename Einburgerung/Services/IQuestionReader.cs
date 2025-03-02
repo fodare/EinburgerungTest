@@ -6,5 +6,6 @@ namespace Einburgerung.Services
     public interface IQuestionReader
     {
         Task<List<QuestionModel>> ReadGeneralQuestions();
+        Task<List<StateQuestionModel>> ReadStateQuestions();
     }
 }

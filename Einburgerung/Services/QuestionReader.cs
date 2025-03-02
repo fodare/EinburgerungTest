@@ -13,5 +13,14 @@ namespace Einburgerung.Services
             List<QuestionModel> generalQuestionList = JsonConvert.DeserializeObject<List<QuestionModel>>(generalQuestionContnet)!;
             return generalQuestionList;
         }
+
+        public async Task<List<StateQuestionModel>> ReadStateQuestions()
+        {
+            using var fileStream = await FileSystem.OpenAppPackageFileAsync("statequestions.json");
+            using StreamReader? streamReader = new(fileStream);
+            var stateQuestionsContent = streamReader.ReadToEnd();
+            List<StateQuestionModel> stateQuestionsList = JsonConvert.DeserializeObject<List<StateQuestionModel>>(stateQuestionsContent)!;
+            return stateQuestionsList;
+        }
     }
 }
