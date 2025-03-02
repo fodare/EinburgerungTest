@@ -16,7 +16,7 @@ namespace Einburgerung.Services
 
         public async Task<List<StateQuestionModel>> ReadStateQuestions()
         {
-            using var fileStream = await FileSystem.OpenAppPackageFileAsync("statequestions.json");
+            using var fileStream = await FileSystem.OpenAppPackageFileAsync("updatedStateQuestion.json");
             using StreamReader? streamReader = new(fileStream);
             var stateQuestionsContent = streamReader.ReadToEnd();
             List<StateQuestionModel> stateQuestionsList = JsonConvert.DeserializeObject<List<StateQuestionModel>>(stateQuestionsContent)!;
