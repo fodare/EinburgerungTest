@@ -5,9 +5,6 @@ namespace Einburgerung.Services
 {
     public class QuestionReader : IQuestionReader
     {
-        private static readonly string appDirectory = FileSystem.Current.AppDataDirectory;
-        private static readonly string generalQuestionsDirectory = System.IO.Path.Combine(appDirectory, "generalquestions.json");
-
         public async Task<List<QuestionModel>> ReadGeneralQuestions()
         {
             using var fileStream = await FileSystem.OpenAppPackageFileAsync("generalquestions.json");
