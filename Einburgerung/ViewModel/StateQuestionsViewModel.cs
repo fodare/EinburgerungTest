@@ -1,7 +1,9 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Einburgerung.Model;
 using Einburgerung.Services;
 
 namespace Einburgerung.ViewModel
@@ -10,16 +12,19 @@ namespace Einburgerung.ViewModel
     {
         private readonly IStateQuestionService _stateQuestionService;
         private readonly NotificationService _notificationService;
+        public ObservableCollection<StateQuestionsViewModel> StateQuestions { get; } = new();
+        public ObservableCollection<string> StatesNames { get; } = new();
 
         public StateQuestionsViewModel(IStateQuestionService stateQuestionService, NotificationService notificationService)
         {
             Title = "State Questions";
             _stateQuestionService = stateQuestionService;
             _notificationService = notificationService;
+            InitilizeStateNames();
         }
 
         [ObservableProperty]
-        public int stateQuestionsListCount;
+        public StateQuestionModel? currentQuestion;
 
         [RelayCommand]
         public async Task GetStateQuestionsAsync()
@@ -31,7 +36,6 @@ namespace Einburgerung.ViewModel
             try
             {
                 var stateQuestionsList = await _stateQuestionService.GetStateQuestionsAsync();
-                StateQuestionsListCount = stateQuestionsList.Count;
 
             }
             catch (System.Exception exp)
@@ -41,6 +45,15 @@ namespace Einburgerung.ViewModel
             }
 
             IsBusy = false;
+        }
+
+        public void InitilizeStateNames()
+        {
+            var distinctStateQuestion = _stateQuestionService.GetDistinctStates();
+            foreach (var question in distinctStateQuestion)
+            {
+                StatesNames?.Add(question.State!);
+            }
         }
     }
 }

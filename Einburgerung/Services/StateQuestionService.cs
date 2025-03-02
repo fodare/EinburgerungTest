@@ -1,3 +1,4 @@
+using System.Runtime.ExceptionServices;
 using Einburgerung.Model;
 
 namespace Einburgerung.Services
@@ -15,6 +16,12 @@ namespace Einburgerung.Services
         {
             var stateQuestionsList = await _questionReader.ReadStateQuestions();
             return [.. stateQuestionsList.Where(question => question != null)];
+        }
+
+        public List<StateQuestionModel> GetDistinctStates()
+        {
+            var stateQuestions = GetStateQuestionsAsync().Result;
+            return [.. stateQuestions.GroupBy(question => question.State).Select(question => question.First())];
         }
     }
 }
