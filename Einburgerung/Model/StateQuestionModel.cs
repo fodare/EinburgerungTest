@@ -13,5 +13,6 @@ namespace Einburgerung.Model
         public Translation? Translation { get; set; }
         public string? Category { get; set; }
         public string? Context { get; set; }
+        public string? State { get; set; }
     }
 }
