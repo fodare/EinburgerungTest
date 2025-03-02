@@ -8,13 +8,125 @@
              x:Class="Einburgerung.View.StateQuestionsPage"
              Title="{Binding Title}">
 
-    <VerticalStackLayout>
+    <ScrollView>
 
-        <Label
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+        <VerticalStackLayout Padding="5">
 
-    </VerticalStackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="*,Auto,*,Auto"
+                  RowSpacing="20"
+                  Margin="0,20"
+                  Padding="0,5">
+
+                <Picker Title="Select desired state..."
+                        ItemsSource="{Binding StatesNames}"
+                        SelectedItem="{Binding SelectedState}"
+                        Grid.ColumnSpan="1"/>
+
+                <Border x:Name="questionBorder"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        StrokeThickness="0">
+
+                    <StackLayout>
+
+                        <Label x:Name="questionNumber"
+                               Text="{Binding CurrentQuestion.Num}"
+                               FontSize="20"/>
+
+                        <Label x:Name="questionLabel"
+                               Text="{Binding CurrentQuestion.Question}"
+                               FontSize="25"
+                               FontAttributes="Bold"/>
+
+                        <Image Source="{Binding CurrentQuestion.Image}"
+                               Aspect="AspectFit"/>
+
+                    </StackLayout>
+
+                </Border>
+
+                <Border x:Name="optionsBorder"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="2"
+                        Margin="0,50"
+                        StrokeThickness="0">
+
+                    <StackLayout Spacing="20">
+
+                        <Button x:Name="optionA"
+                                Text="{Binding CurrentQuestion.A}"
+                                Command="{Binding CheckAnswerCommand}"
+                                CommandParameter="a"
+                                TextColor="Black"
+                                BackgroundColor="Transparent"
+                                BorderColor="Black"
+                                BorderWidth="1"/>
+
+                        <Button x:Name="optionB"
+                                Text="{Binding CurrentQuestion.B}"
+                                Command="{Binding CheckAnswerCommand}"
+                                CommandParameter="b"
+                                TextColor="Black"
+                                BackgroundColor="Transparent"
+                                BorderColor="Black"
+                                BorderWidth="1"/>
+
+                        <Button x:Name="optionC"
+                                Text="{Binding CurrentQuestion.C}"
+                                Command="{Binding CheckAnswerCommand}"
+                                CommandParameter="c"
+                                TextColor="Black"
+                                BackgroundColor="Transparent"
+                                BorderColor="Black"
+                                BorderWidth="1"/>
+
+                        <Button x:Name="optionD"
+                                Text="{Binding CurrentQuestion.D}"
+                                Command="{Binding CheckAnswerCommand}"
+                                CommandParameter="d"
+                                TextColor="Black"
+                                BackgroundColor="Transparent"
+                                BorderColor="Black"
+                                BorderWidth="1"/>
+
+                    </StackLayout>
+
+                </Border>
+
+                <Border x:Name="contextBorder"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="3"
+                        Margin="0,50"
+                        StrokeThickness="0">
+
+                    <StackLayout Spacing="10">
+
+                        <Label Text="Category:"
+                               FontAttributes="Italic"
+                               FontSize="20"/>
+                        <Label Text="{Binding CurrentQuestion.Category}"
+                               FontSize="20"
+                               Margin="0,10"/>
+
+                        <Label Text="Context:"
+                               FontAttributes="Italic"
+                               FontSize="20"/>
+                        <Label Text="{Binding CurrentQuestion.Context}"
+                               FontSize="20"/>
+
+                    </StackLayout>
+
+                </Border>
+
+            </Grid>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
 
 </ContentPage>
