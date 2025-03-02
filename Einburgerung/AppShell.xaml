@@ -5,12 +5,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:view="clr-namespace:Einburgerung.View"
     Shell.FlyoutBehavior="Flyout"
-    Title="Einburgerung">
+    Title="Einburgerung Mock">
 
-    <ShellContent
-        Shell.NavBarIsVisible="True"
-        Title="Home"
-        ContentTemplate="{DataTemplate view:MainPage}"
-        Route="MainPage"/>
+    <FlyoutItem Title="General"
+                Icon="question.png">
+
+        <Tab>
+            <ShellContent
+                Shell.NavBarIsVisible="True"
+                ContentTemplate="{DataTemplate view:MainPage}"
+                Route="MainPage"/>
+        </Tab>
+
+    </FlyoutItem>
+
+    <FlyoutItem Title="States"
+                Icon="question.png">
+
+        <Tab>
+            <ShellContent
+                Shell.NavBarIsVisible="True"
+                ContentTemplate="{DataTemplate view:StateQuestionsPage}"
+                Route="StateQuestionsPage"/>
+        </Tab>
+
+    </FlyoutItem>
 
 </Shell>
