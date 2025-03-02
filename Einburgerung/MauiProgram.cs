@@ -22,6 +22,12 @@ namespace Einburgerung
 			builder.Services.AddSingleton<MainPage>();
 			builder.Services.AddSingleton<MainPageViewModel>();
 			builder.Services.AddSingleton<NotificationService>();
+
+			builder.Services.AddSingleton<StateQuestionsPage>();
+			builder.Services.AddSingleton<StateQuestionsViewModel>();
+
+			builder.Services.AddSingleton<IStateQuestionService, StateQuestionService>();
+
 #if DEBUG
 			builder.Logging.AddDebug();
 #endif

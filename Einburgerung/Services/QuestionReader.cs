@@ -5,9 +5,6 @@ namespace Einburgerung.Services
 {
     public class QuestionReader : IQuestionReader
     {
-        private static readonly string appDirectory = FileSystem.Current.AppDataDirectory;
-        private static readonly string generalQuestionsDirectory = System.IO.Path.Combine(appDirectory, "generalquestions.json");
-
         public async Task<List<QuestionModel>> ReadGeneralQuestions()
         {
             using var fileStream = await FileSystem.OpenAppPackageFileAsync("generalquestions.json");
@@ -15,6 +12,15 @@ namespace Einburgerung.Services
             var generalQuestionContnet = streamReader.ReadToEnd();
             List<QuestionModel> generalQuestionList = JsonConvert.DeserializeObject<List<QuestionModel>>(generalQuestionContnet)!;
             return generalQuestionList;
+        }
+
+        public async Task<List<StateQuestionModel>> ReadStateQuestions()
+        {
+            using var fileStream = await FileSystem.OpenAppPackageFileAsync("updatedStateQuestion.json");
+            using StreamReader? streamReader = new(fileStream);
+            var stateQuestionsContent = streamReader.ReadToEnd();
+            List<StateQuestionModel> stateQuestionsList = JsonConvert.DeserializeObject<List<StateQuestionModel>>(stateQuestionsContent)!;
+            return stateQuestionsList;
         }
     }
 }
