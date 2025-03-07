@@ -12,7 +12,7 @@ namespace Einburgerung.ViewModel
     {
         private readonly IStateQuestionService _stateQuestionService;
         private readonly NotificationService _notificationService;
-        public ObservableCollection<StateQuestionsViewModel> StateQuestions { get; } = new();
+        public ObservableCollection<StateQuestionModel> StateQuestions { get; } = new();
         public ObservableCollection<string> StatesNames { get; } = new();
 
         public StateQuestionsViewModel(IStateQuestionService stateQuestionService, NotificationService notificationService)
@@ -23,30 +23,6 @@ namespace Einburgerung.ViewModel
             InitilizeStateNames();
         }
 
-        [ObservableProperty]
-        public StateQuestionModel? currentQuestion;
-
-        [RelayCommand]
-        public async Task GetStateQuestionsAsync()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            try
-            {
-                var stateQuestionsList = await _stateQuestionService.GetStateQuestionsAsync();
-
-            }
-            catch (System.Exception exp)
-            {
-                await Shell.Current.DisplayAlert("Error", "Error reading state questions~", "Ok");
-                Debug.WriteLine($"Error reading state questions list {exp.Message}");
-            }
-
-            IsBusy = false;
-        }
-
         public void InitilizeStateNames()
         {
             var distinctStateQuestion = _stateQuestionService.GetDistinctStates();
@@ -54,6 +30,69 @@ namespace Einburgerung.ViewModel
             {
                 StatesNames?.Add(question.State!);
             }
+        }
+
+        [ObservableProperty]
+        public StateQuestionModel? currentQuestion;
+
+        [ObservableProperty]
+        public string? selectedState;
+
+        [RelayCommand]
+        public async Task GetSelectedStateQuestions()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            try
+            {
+                var stateQuestions = await _stateQuestionService.GetStateQuestionsAsync();
+                var selectedStatequestions = stateQuestions.Where(question => question.State == SelectedState);
+                StateQuestions.Clear();
+                foreach (var question in selectedStatequestions)
+                {
+                    StateQuestions?.Add(question);
+                }
+
+                CurrentQuestion = StateQuestions!.First();
+            }
+            catch (System.Exception)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Error reading questions for {SelectedState}", "Ok");
+            }
+            IsBusy = false;
+        }
+
+        [RelayCommand]
+        public async Task CheckAnswerAsync(string? selectedOption)
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            try
+            {
+                if (CurrentQuestion?.Solution == selectedOption)
+                {
+                    await _notificationService.SnakbarNotification("Correct!");
+                }
+                else
+                {
+                    await _notificationService.SnakbarNotification("Wrong!");
+                }
+                NextQuestion();
+            }
+            catch (System.Exception)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Error validating input", "Ok");
+            }
+            IsBusy = false;
+        }
+
+        public void NextQuestion()
+        {
+            CurrentQuestion = StateQuestions.FirstOrDefault(question => question.Num == (CurrentQuestion!.Num + 1));
         }
     }
 }
