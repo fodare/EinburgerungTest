@@ -1,6 +1,4 @@
-using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Einburgerung.Model;
@@ -33,6 +31,9 @@ namespace Einburgerung.ViewModel
         }
 
         [ObservableProperty]
+        public bool isStateQuestionVisible = false;
+
+        [ObservableProperty]
         public StateQuestionModel? currentQuestion;
 
         [ObservableProperty]
@@ -56,11 +57,13 @@ namespace Einburgerung.ViewModel
                 }
 
                 CurrentQuestion = StateQuestions!.First();
+                IsStateQuestionVisible = true;
             }
             catch (System.Exception)
             {
                 await Shell.Current.DisplayAlert("Error", $"Error reading questions for {SelectedState}", "Ok");
             }
+
             IsBusy = false;
         }
 
@@ -71,16 +74,24 @@ namespace Einburgerung.ViewModel
                 return;
 
             IsBusy = true;
+
+            if (IsReachedEndOfQuestionList())
+            {
+                await Shell.Current.DisplayAlert("Info", $"There are no further questions for {SelectedState}. Try getting new questions or explore questions from other states", "Ok");
+                IsStateQuestionVisible = false;
+                IsBusy = false;
+                return;
+            }
+
             try
             {
                 if (CurrentQuestion?.Solution == selectedOption)
-                {
                     await _notificationService.SnakbarNotification("Correct!");
-                }
+
                 else
-                {
                     await _notificationService.SnakbarNotification("Wrong!");
-                }
+
+                await Task.Delay(2000);
                 NextQuestion();
             }
             catch (System.Exception)
@@ -93,6 +104,14 @@ namespace Einburgerung.ViewModel
         public void NextQuestion()
         {
             CurrentQuestion = StateQuestions.FirstOrDefault(question => question.Num == (CurrentQuestion!.Num + 1));
+        }
+
+        public bool IsReachedEndOfQuestionList()
+        {
+            if (CurrentQuestion is null)
+                return true;
+
+            return false;
         }
     }
 }
