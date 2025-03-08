@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Einburgerung.Model;
@@ -24,6 +23,14 @@ namespace Einburgerung.ViewModel
             InitializeCurrentQuestion();
         }
 
+        public void InitializeCurrentQuestion()
+        {
+            var questionsList = GetGeneralQuestions();
+            CleanAndUpdateQuestionsList(questionsList);
+            QuestionModel firstGeneralQuestion = QuestionsList.First();
+            UpdateCurrentQuestion(firstGeneralQuestion);
+        }
+
         [RelayCommand]
         public async Task GetGeneralQuestionsAsync()
         {
@@ -37,12 +44,38 @@ namespace Einburgerung.ViewModel
             {
                 await Shell.Current.DisplayAlert("Error!", "Error loading general questions!", "Ok");
             }
+            IsBusy = false;
+        }
 
-            finally
+        [RelayCommand]
+        public async Task CheckAnswerAsync(string? selectedOption)
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+            if (IsReachedEndOfQuestionList())
             {
+                await Shell.Current.DisplayAlert("Info", $"There are no further questions. Pull to refresh or checkout state questions", "Ok");
                 IsBusy = false;
+                CurrentQuestion = QuestionsList.First();
+                return;
             }
 
+            try
+            {
+                if (selectedOption == CurrentQuestion!.Solution)
+                    await _notificationService.SnakbarNotification("Correct!");
+                else
+                    await _notificationService.SnakbarNotification("Wrong!");
+
+                await Task.Delay(2000);
+                NextQuestion();
+            }
+            catch (System.Exception)
+            {
+                await _notificationService.SnakbarNotification("Error validating selection!");
+            }
+            IsBusy = false;
         }
 
         public List<QuestionModel> GetGeneralQuestions()
@@ -57,7 +90,6 @@ namespace Einburgerung.ViewModel
             {
                 QuestionsList!.Add(question);
             }
-
         }
 
         public void UpdateCurrentQuestion(QuestionModel? questionModel)
@@ -65,49 +97,17 @@ namespace Einburgerung.ViewModel
             CurrentQuestion = questionModel;
         }
 
-        public void InitializeCurrentQuestion()
-        {
-            var questionsList = GetGeneralQuestions();
-            CleanAndUpdateQuestionsList(questionsList);
-            QuestionModel firstGeneralQuestion = QuestionsList.First();
-            UpdateCurrentQuestion(firstGeneralQuestion);
-        }
-
         public void NextQuestion()
         {
             CurrentQuestion = QuestionsList.FirstOrDefault(question => question.Num == (CurrentQuestion!.Num + 1));
         }
 
-        [RelayCommand]
-        public async Task CheckAnswerAsync(string? selectedOption)
+        public bool IsReachedEndOfQuestionList()
         {
-            if (IsBusy)
-                return;
+            if (CurrentQuestion is null)
+                return true;
 
-            try
-            {
-                IsBusy = true;
-                if (selectedOption == CurrentQuestion!.Solution)
-                {
-                    await _notificationService.SnakbarNotification("Correct!");
-                }
-                else
-                {
-                    await _notificationService.SnakbarNotification("Wrong!");
-                }
-
-                NextQuestion();
-            }
-            catch (System.Exception exp)
-            {
-                await _notificationService.SnakbarNotification("Error validating selection!");
-                Debug.WriteLine($"Error. {exp.Message}");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-
+            return false;
         }
     }
 }
