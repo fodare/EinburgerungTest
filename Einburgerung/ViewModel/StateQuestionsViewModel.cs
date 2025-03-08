@@ -78,7 +78,7 @@ namespace Einburgerung.ViewModel
             if (IsReachedEndOfQuestionList())
             {
                 await Shell.Current.DisplayAlert("Info", $"There are no further questions for {SelectedState}. Try getting new questions or explore questions from other states", "Ok");
-                IsStateQuestionVisible = false;
+                CurrentQuestion = StateQuestions.First();
                 IsBusy = false;
                 return;
             }
