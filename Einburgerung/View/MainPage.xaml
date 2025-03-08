@@ -12,6 +12,12 @@
 
         <VerticalStackLayout Padding="5">
 
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                Color="Black"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+
             <Grid ColumnDefinitions="*,*"
                   RowDefinitions="Auto,*,Auto"
                   RowSpacing="20"
