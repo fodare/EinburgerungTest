@@ -12,8 +12,11 @@
 
         <VerticalStackLayout Padding="5">
 
-            <ActivityIndicator IsRunning="{Binding IsBusy}"
-                               Color="Black"/>
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                Color="Black"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
 
             <Grid ColumnDefinitions="*,*"
                   RowDefinitions="*,Auto,*,Auto"
@@ -41,7 +44,8 @@
                         Margin="0,30"
                         HorizontalOptions="Fill"
                         VerticalOptions="Fill"
-                        StrokeThickness="0">
+                        StrokeThickness="0"
+                        IsVisible="{Binding IsStateQuestionVisible}">
 
                     <StackLayout>
 
@@ -65,7 +69,8 @@
                         Grid.ColumnSpan="2"
                         Grid.Row="2"
                         Margin="0,50"
-                        StrokeThickness="0">
+                        StrokeThickness="0"
+                        IsVisible="{Binding IsStateQuestionVisible}">
 
                     <StackLayout Spacing="20">
 
@@ -113,7 +118,8 @@
                         Grid.ColumnSpan="2"
                         Grid.Row="3"
                         Margin="0,50"
-                        StrokeThickness="0">
+                        StrokeThickness="0"
+                        IsVisible="{Binding IsStateQuestionVisible}">
 
                     <StackLayout Spacing="10">
 
