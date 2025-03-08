@@ -12,7 +12,11 @@
 
         <VerticalStackLayout Padding="5">
 
-            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                Color="Black"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
 
             <Grid ColumnDefinitions="*,*"
                   RowDefinitions="*,Auto,*,Auto"
@@ -25,12 +29,23 @@
                         SelectedItem="{Binding SelectedState}"
                         Grid.ColumnSpan="1"/>
 
+                <Button Text="Get questions"
+                        Grid.Column="1"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        BorderColor="Black"
+                        BorderWidth="1"
+                        IsEnabled="{Binding IsNotBusy}"
+                        Command="{Binding GetSelectedStateQuestionsCommand}"/>
+
                 <Border x:Name="questionBorder"
                         Grid.ColumnSpan="2"
                         Grid.Row="1"
+                        Margin="0,30"
                         HorizontalOptions="Fill"
                         VerticalOptions="Fill"
-                        StrokeThickness="0">
+                        StrokeThickness="0"
+                        IsVisible="{Binding IsStateQuestionVisible}">
 
                     <StackLayout>
 
@@ -54,7 +69,8 @@
                         Grid.ColumnSpan="2"
                         Grid.Row="2"
                         Margin="0,50"
-                        StrokeThickness="0">
+                        StrokeThickness="0"
+                        IsVisible="{Binding IsStateQuestionVisible}">
 
                     <StackLayout Spacing="20">
 
@@ -102,7 +118,8 @@
                         Grid.ColumnSpan="2"
                         Grid.Row="3"
                         Margin="0,50"
-                        StrokeThickness="0">
+                        StrokeThickness="0"
+                        IsVisible="{Binding IsStateQuestionVisible}">
 
                     <StackLayout Spacing="10">
 

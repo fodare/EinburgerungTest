@@ -2,7 +2,7 @@ namespace Einburgerung.Model
 {
     public class StateQuestionModel
     {
-        public string? Num { get; set; }
+        public int Num { get; set; }
         public string? Question { get; set; }
         public string? A { get; set; }
         public string? B { get; set; }
