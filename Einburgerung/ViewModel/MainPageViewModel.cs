@@ -89,6 +89,11 @@ namespace Einburgerung.ViewModel
             {
                 CurrentQuestion = QuestionsList.Where(question => question.Num == questionNumber).FirstOrDefault();
             }
+            else if (userInput == null)
+            {
+                IsBusy = false;
+                return;
+            }
             else
             {
                 await Shell.Current.DisplayAlert("Error", $"Question number ranges between 1 - {QuestionsList.Count}", "Ok");
