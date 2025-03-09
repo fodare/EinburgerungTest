@@ -21,7 +21,7 @@
             <Grid ColumnDefinitions="*,*"
                   RowDefinitions="Auto,*,Auto"
                   RowSpacing="20"
-                  Margin="0,20"
+                  Margin="0,0,0,5"
                   Padding="0,5">
 
                 <Border x:Name="questionBorder"
@@ -32,9 +32,23 @@
 
                     <StackLayout>
 
-                        <Label x:Name="questionNumber"
-                               Text="{Binding CurrentQuestion.Num}"
-                               FontSize="20"/>
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="*,*"
+                              Margin="0,0,0,20">
+
+                            <Label x:Name="questionNumber"
+                                   Text="{Binding CurrentQuestion.Num}"
+                                   FontSize="28"/>
+
+                            <Button Text="Jump to question"
+                                    Grid.Column="1"
+                                    TextColor="Black"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="Black"
+                                    BorderWidth="1"
+                                    Command="{Binding JumpToQuestionNumberCommand}"/>
+
+                        </Grid>
 
                         <Label x:Name="questionLabel"
                                Text="{Binding CurrentQuestion.Question}"
