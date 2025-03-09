@@ -78,6 +78,24 @@ namespace Einburgerung.ViewModel
             IsBusy = false;
         }
 
+        [RelayCommand]
+        public async Task JumpToQuestionNumberAsync()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+            string userInput = await Shell.Current.DisplayPromptAsync("Enter question number below.", $"Range 1 - {QuestionsList.Count}");
+            if (int.TryParse(userInput, out int questionNumber) && questionNumber >= 1 && questionNumber <= QuestionsList.Count)
+            {
+                CurrentQuestion = QuestionsList.Where(question => question.Num == questionNumber).FirstOrDefault();
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", $"Question number ranges between 1 - {QuestionsList.Count}", "Ok");
+            }
+            IsBusy = false;
+        }
+
         public List<QuestionModel> GetGeneralQuestions()
         {
             return _generalQuestionService.GetGeneralQuestions();

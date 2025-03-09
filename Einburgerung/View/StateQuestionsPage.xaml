@@ -51,7 +51,7 @@
 
                         <Label x:Name="questionNumber"
                                Text="{Binding CurrentQuestion.Num}"
-                               FontSize="20"/>
+                               FontSize="25"/>
 
                         <Label x:Name="questionLabel"
                                Text="{Binding CurrentQuestion.Question}"
