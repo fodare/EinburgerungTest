@@ -64,9 +64,9 @@ namespace Einburgerung.ViewModel
             try
             {
                 if (selectedOption == CurrentQuestion!.Solution)
-                    await _notificationService.SnakbarNotification("Correct!");
+                    await _notificationService.SnakbarNotification("Correct.");
                 else
-                    await _notificationService.SnakbarNotification("Wrong!");
+                    await _notificationService.SnakbarNotification($"Wrong. Correct answer is {CurrentQuestion.Solution}");
 
                 await Task.Delay(2000);
                 NextQuestion();
