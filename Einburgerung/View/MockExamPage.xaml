@@ -12,10 +12,106 @@
 
         <VerticalStackLayout Padding="5">
 
-            <Label
-                Text="Welcome to .NET MAUI!"
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                Color="Black"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
+
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="*,*,Auto"
+                  RowSpacing="20"
+                  Padding="0.5">
+
+                <Picker Title="Select desired state..."
+                        ItemsSource="{Binding StateNames}"
+                        SelectedItem="{Binding SelectedStateName}"
+                        Grid.ColumnSpan="1"/>
+
+                <Button Text="Select state and begin exam"
+                        Grid.Column="1"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        BorderColor="Black"
+                        BorderWidth="1"
+                        IsEnabled="{Binding IsNotBusy}"
+                        Command="{Binding PrepareMockExamCommand}"/>
+
+                <Border x:Name="questionBorder"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        StrokeThickness="0"
+                        IsVisible="{Binding IsQuestionVisible}">
+
+                    <StackLayout>
+
+                        <Label x:Name="questionNumber"
+                               Text="{Binding CurrentQuestion.Num, StringFormat='{0}/33'}"
+                               FontSize="25"
+                               Padding="0,0,0,10"/>
+
+                        <Label x:Name="questionLabel"
+                               Text="{Binding CurrentQuestion.Question}"
+                               FontSize="25"
+                               FontAttributes="Bold"
+                               Padding="0,0,0,10"/>
+
+                        <Image Source="{Binding CurrentQuestion.Image}"
+                               Aspect="AspectFit"/>
+
+                    </StackLayout>
+
+                </Border>
+
+                <Border x:Name="optionsBorder"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="2"
+                        StrokeThickness="0"
+                        IsVisible="{Binding IsQuestionVisible}">
+
+                    <StackLayout Spacing="20">
+
+                        <Button x:Name="optionA"
+                                Text="{Binding CurrentQuestion.A}"
+                                Command="{Binding CheckAnswerCommand}"
+                                CommandParameter="a"
+                                TextColor="Black"
+                                BackgroundColor="Transparent"
+                                BorderColor="Black"
+                                BorderWidth="1"/>
+
+                        <Button x:Name="optionB"
+                                Text="{Binding CurrentQuestion.B}"
+                                Command="{Binding CheckAnswerCommand}"
+                                CommandParameter="b"
+                                TextColor="Black"
+                                BackgroundColor="Transparent"
+                                BorderColor="Black"
+                                BorderWidth="1"/>
+
+                        <Button x:Name="optionC"
+                                Text="{Binding CurrentQuestion.C}"
+                                Command="{Binding CheckAnswerCommand}"
+                                CommandParameter="c"
+                                TextColor="Black"
+                                BackgroundColor="Transparent"
+                                BorderColor="Black"
+                                BorderWidth="1"/>
+
+                        <Button x:Name="optionD"
+                                Text="{Binding CurrentQuestion.D}"
+                                Command="{Binding CheckAnswerCommand}"
+                                CommandParameter="d"
+                                TextColor="Black"
+                                BackgroundColor="Transparent"
+                                BorderColor="Black"
+                                BorderWidth="1"/>
+
+                    </StackLayout>
+
+                </Border>
+
+            </Grid>
 
         </VerticalStackLayout>
 
