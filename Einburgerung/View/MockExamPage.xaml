@@ -72,7 +72,7 @@
                     <StackLayout Spacing="20">
 
                         <Button x:Name="optionA"
-                                Text="{Binding CurrentQuestion.A}"
+                                Text="{Binding CurrentQuestion.A, StringFormat='A : {0}'}"
                                 Command="{Binding CheckAnswerCommand}"
                                 CommandParameter="a"
                                 TextColor="Black"
@@ -81,7 +81,7 @@
                                 BorderWidth="1"/>
 
                         <Button x:Name="optionB"
-                                Text="{Binding CurrentQuestion.B}"
+                                Text="{Binding CurrentQuestion.B, StringFormat='B : {0}'}"
                                 Command="{Binding CheckAnswerCommand}"
                                 CommandParameter="b"
                                 TextColor="Black"
@@ -90,7 +90,7 @@
                                 BorderWidth="1"/>
 
                         <Button x:Name="optionC"
-                                Text="{Binding CurrentQuestion.C}"
+                                Text="{Binding CurrentQuestion.C, StringFormat='C : {0}'}"
                                 Command="{Binding CheckAnswerCommand}"
                                 CommandParameter="c"
                                 TextColor="Black"
@@ -99,7 +99,7 @@
                                 BorderWidth="1"/>
 
                         <Button x:Name="optionD"
-                                Text="{Binding CurrentQuestion.D}"
+                                Text="{Binding CurrentQuestion.D, StringFormat='D : {0}'}"
                                 Command="{Binding CheckAnswerCommand}"
                                 CommandParameter="d"
                                 TextColor="Black"

@@ -89,7 +89,7 @@ namespace Einburgerung.ViewModel
                     await _notificationService.SnakbarNotification("Correct!");
 
                 else
-                    await _notificationService.SnakbarNotification("Wrong!");
+                    await _notificationService.SnakbarNotification($"Wrong. Correct answer is {CurrentQuestion?.Solution}");
 
                 await Task.Delay(2000);
                 NextQuestion();
