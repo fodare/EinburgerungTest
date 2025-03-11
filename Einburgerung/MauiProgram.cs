@@ -3,6 +3,7 @@ using Einburgerung.View;
 using Einburgerung.ViewModel;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using Einburgerung.DTO;
 
 namespace Einburgerung
 {
@@ -21,6 +22,7 @@ namespace Einburgerung
             builder.Services.AddSingleton<IGeneralQuestionService, GeneralQuestionService>();
             builder.Services.AddSingleton<NotificationService>();
             builder.Services.AddSingleton<IStateQuestionService, StateQuestionService>();
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<MockExamPage>();
