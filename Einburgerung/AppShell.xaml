@@ -31,4 +31,16 @@
 
     </FlyoutItem>
 
+    <FlyoutItem Title="Mock Exam"
+                Icon="mock.png">
+
+        <Tab>
+            <ShellContent
+                Shell.NavBarIsVisible="True"
+                ContentTemplate="{DataTemplate view:MockExamPage}"
+                Route="MockExamPage"/>
+        </Tab>
+
+    </FlyoutItem>
+
 </Shell>
