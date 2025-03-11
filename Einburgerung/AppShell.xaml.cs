@@ -8,6 +8,7 @@ namespace Einburgerung
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(StateQuestionsPage), typeof(StateQuestionsPage));
+            Routing.RegisterRoute(nameof(MockExamPage), typeof(MockExamPage));
         }
     }
 }
