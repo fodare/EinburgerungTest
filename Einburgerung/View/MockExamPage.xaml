@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:view="clr-namespace:Einburgerung.View"
              xmlns:viewmodel="clr-namespace:Einburgerung.ViewModel"
+             xmlns:model="clr-namespace:Einburgerung.Model"
              x:DataType="viewmodel:MockExamPageViewModel"
              x:Class="Einburgerung.View.MockExamPage"
              Title="{Binding Title}">
