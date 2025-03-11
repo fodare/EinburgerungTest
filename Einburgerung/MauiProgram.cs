@@ -19,14 +19,16 @@ namespace Einburgerung
 
             builder.Services.AddSingleton<IQuestionReader, QuestionReader>();
             builder.Services.AddSingleton<IGeneralQuestionService, GeneralQuestionService>();
-            builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<NotificationService>();
-
-            builder.Services.AddSingleton<StateQuestionsPage>();
-            builder.Services.AddSingleton<StateQuestionsViewModel>();
-
             builder.Services.AddSingleton<IStateQuestionService, StateQuestionService>();
+
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<MockExamPage>();
+            builder.Services.AddSingleton<StateQuestionsPage>();
+
+            builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<StateQuestionsViewModel>();
+            builder.Services.AddTransient<MockExamPageViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
