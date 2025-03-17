@@ -8,170 +8,178 @@
              x:Class="Einburgerung.View.MainPage"
              Title="{Binding Title}">
 
-    <ContentPage.Resources>
+        <ContentPage.Resources>
 
-        <ResourceDictionary>
-            <Style TargetType="Button"
-                   x:Name="customButton"
-                   x:Key="CustomButton">
-                <Setter Property="TextColor"
-                        Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
-                <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Light = Transparent, Dark = Black}"/>
-                <Setter Property="BorderColor"
-                        Value="{AppThemeBinding Light = Black, Dark = White}"/>
-                <Setter Property="FontFamily"
-                        Value="OpenSansRegular"/>
-                <Setter Property="FontSize"
-                        Value="14"/>
-                <Setter Property="BorderWidth"
-                        Value="1"/>
-                <Setter Property="CornerRadius"
-                        Value="20"/>
-                <Setter Property="Padding"
-                        Value="14,10"/>
-                <Setter Property="MinimumHeightRequest"
-                        Value="44"/>
-                <Setter Property="MinimumWidthRequest"
-                        Value="44"/>
-                <Setter Property="VisualStateManager.VisualStateGroups">
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal"/>
-                            <VisualState x:Name="Disabled">
-                                <VisualState.Setters>
-                                    <Setter Property="TextColor"
-                                            Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}"/>
-                                    <Setter Property="BackgroundColor"
-                                            Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"/>
-                                </VisualState.Setters>
-                            </VisualState>
-                            <VisualState x:Name="PointerOver"/>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </Setter>
-            </Style>
+                <ResourceDictionary>
+                        <Style TargetType="Button"
+                               x:Name="customButton"
+                               x:Key="CustomButton">
+                                <Setter Property="TextColor"
+                                        Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                <Setter Property="BackgroundColor"
+                                        Value="{AppThemeBinding Light = Transparent, Dark = Black}"/>
+                                <Setter Property="BorderColor"
+                                        Value="{AppThemeBinding Light = Black, Dark = White}"/>
+                                <Setter Property="FontFamily"
+                                        Value="OpenSansRegular"/>
+                                <Setter Property="FontSize"
+                                        Value="14"/>
+                                <Setter Property="BorderWidth"
+                                        Value="1"/>
+                                <Setter Property="CornerRadius"
+                                        Value="20"/>
+                                <Setter Property="Padding"
+                                        Value="14,10"/>
+                                <Setter Property="MinimumHeightRequest"
+                                        Value="44"/>
+                                <Setter Property="MinimumWidthRequest"
+                                        Value="44"/>
+                                <Setter Property="VisualStateManager.VisualStateGroups">
+                                        <VisualStateGroupList>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualState x:Name="Normal"/>
+                                                        <VisualState x:Name="Disabled">
+                                                                <VisualState.Setters>
+                                                                        <Setter Property="TextColor"
+                                                                                Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}"/>
+                                                                        <Setter Property="BackgroundColor"
+                                                                                Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"/>
+                                                                </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState x:Name="Pressed">
+                                                                <VisualState.Setters>
+                                                                        <Setter Property="TextColor"
+                                                                                Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}"/>
+                                                                        <Setter Property="BackgroundColor"
+                                                                                Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"/>
+                                                                </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState x:Name="PointerOver"/>
+                                                </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                </Setter>
+                        </Style>
 
-        </ResourceDictionary>
+                </ResourceDictionary>
 
-    </ContentPage.Resources>
+        </ContentPage.Resources>
 
-    <ScrollView>
+        <ScrollView>
 
-        <VerticalStackLayout Padding="5">
+                <VerticalStackLayout Padding="5">
 
-            <ActivityIndicator
-                IsRunning="{Binding IsBusy}"
-                Color="Black"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
+                        <ActivityIndicator
+                                IsRunning="{Binding IsBusy}"
+                                Color="Black"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"/>
 
-            <Grid ColumnDefinitions="*,*"
-                  RowDefinitions="Auto,*,Auto"
-                  RowSpacing="20"
-                  Margin="0,0,0,5"
-                  Padding="0,5">
+                        <Grid ColumnDefinitions="*,*"
+                              RowDefinitions="Auto,*,Auto"
+                              RowSpacing="20"
+                              Margin="0,0,0,5"
+                              Padding="0,5">
 
-                <Border x:Name="questionBorder"
-                        Grid.ColumnSpan="2"
-                        HorizontalOptions="Fill"
-                        VerticalOptions="Fill"
-                        StrokeThickness="0">
+                                <Border x:Name="questionBorder"
+                                        Grid.ColumnSpan="2"
+                                        HorizontalOptions="Fill"
+                                        VerticalOptions="Fill"
+                                        StrokeThickness="0">
 
-                    <StackLayout>
+                                        <StackLayout>
 
-                        <Grid RowDefinitions="*"
-                              ColumnDefinitions="*,*"
-                              Margin="0,0,0,20">
+                                                <Grid RowDefinitions="*"
+                                                      ColumnDefinitions="*,*"
+                                                      Margin="0,0,0,20">
 
-                            <Label x:Name="questionNumber"
-                                   Text="{Binding CurrentQuestion.Num, StringFormat='{0} / 300'}"
-                                   FontSize="28"/>
+                                                        <Label x:Name="questionNumber"
+                                                               Text="{Binding CurrentQuestion.Num, StringFormat='{0} / 300'}"
+                                                               FontSize="28"/>
 
-                            <Button Text="Jump to question"
-                                    Style="{StaticResource CustomButton}"
-                                    Grid.Column="1"
-                                    Command="{Binding JumpToQuestionNumberCommand}"/>
+                                                        <Button Text="Jump to question"
+                                                                Style="{StaticResource CustomButton}"
+                                                                Grid.Column="1"
+                                                                Command="{Binding JumpToQuestionNumberCommand}"/>
+
+                                                </Grid>
+
+                                                <Label x:Name="questionLabel"
+                                                       Text="{Binding CurrentQuestion.Question}"
+                                                       FontSize="25"
+                                                       FontAttributes="Bold"/>
+
+                                                <Image Source="{Binding CurrentQuestion.Image}"
+                                                       Aspect="AspectFit"/>
+
+                                        </StackLayout>
+
+                                </Border>
+
+                                <Border x:Name="optionsBorder"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="1"
+                                        Margin="0,50"
+                                        StrokeThickness="0">
+
+                                        <StackLayout Spacing="20">
+
+                                                <Button x:Name="optionA"
+                                                        Style="{StaticResource CustomButton}"
+                                                        Text="{Binding CurrentQuestion.A, StringFormat='A : {0}'}"
+                                                        Command="{Binding CheckAnswerCommand}"
+                                                        CommandParameter="a"/>
+
+                                                <Button x:Name="optionB"
+                                                        Style="{StaticResource CustomButton}"
+                                                        Text="{Binding CurrentQuestion.B, StringFormat='B : {0}'}"
+                                                        Command="{Binding CheckAnswerCommand}"
+                                                        CommandParameter="b"/>
+
+                                                <Button x:Name="optionC"
+                                                        Style="{StaticResource CustomButton}"
+                                                        Text="{Binding CurrentQuestion.C, StringFormat='C : {0}'}"
+                                                        Command="{Binding CheckAnswerCommand}"
+                                                        CommandParameter="c"/>
+
+                                                <Button x:Name="optionD"
+                                                        Style="{StaticResource CustomButton}"
+                                                        Text="{Binding CurrentQuestion.D, StringFormat='D : {0}'}"
+                                                        Command="{Binding CheckAnswerCommand}"
+                                                        CommandParameter="d"/>
+
+                                        </StackLayout>
+
+                                </Border>
+
+                                <Border x:Name="contextBorder"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="2"
+                                        Margin="0,50"
+                                        StrokeThickness="0">
+
+                                        <StackLayout Spacing="10">
+
+                                                <Label Text="Category:"
+                                                       FontAttributes="Italic"
+                                                       FontSize="20"/>
+                                                <Label Text="{Binding CurrentQuestion.Category}"
+                                                       FontSize="20"
+                                                       Margin="0,10"/>
+
+                                                <Label Text="Context:"
+                                                       FontAttributes="Italic"
+                                                       FontSize="20"/>
+                                                <Label Text="{Binding CurrentQuestion.Context}"
+                                                       FontSize="20"/>
+
+                                        </StackLayout>
+
+                                </Border>
 
                         </Grid>
 
-                        <Label x:Name="questionLabel"
-                               Text="{Binding CurrentQuestion.Question}"
-                               FontSize="25"
-                               FontAttributes="Bold"/>
+                </VerticalStackLayout>
 
-                        <Image Source="{Binding CurrentQuestion.Image}"
-                               Aspect="AspectFit"/>
-
-                    </StackLayout>
-
-                </Border>
-
-                <Border x:Name="optionsBorder"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="1"
-                        Margin="0,50"
-                        StrokeThickness="0">
-
-                    <StackLayout Spacing="20">
-
-                        <Button x:Name="optionA"
-                                Style="{StaticResource CustomButton}"
-                                Text="{Binding CurrentQuestion.A, StringFormat='A : {0}'}"
-                                Command="{Binding CheckAnswerCommand}"
-                                CommandParameter="a"/>
-
-                        <Button x:Name="optionB"
-                                Style="{StaticResource CustomButton}"
-                                Text="{Binding CurrentQuestion.B, StringFormat='B : {0}'}"
-                                Command="{Binding CheckAnswerCommand}"
-                                CommandParameter="b"/>
-
-                        <Button x:Name="optionC"
-                                Style="{StaticResource CustomButton}"
-                                Text="{Binding CurrentQuestion.C, StringFormat='C : {0}'}"
-                                Command="{Binding CheckAnswerCommand}"
-                                CommandParameter="c"/>
-
-                        <Button x:Name="optionD"
-                                Style="{StaticResource CustomButton}"
-                                Text="{Binding CurrentQuestion.D, StringFormat='D : {0}'}"
-                                Command="{Binding CheckAnswerCommand}"
-                                CommandParameter="d"/>
-
-                    </StackLayout>
-
-                </Border>
-
-                <Border x:Name="contextBorder"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="2"
-                        Margin="0,50"
-                        StrokeThickness="0">
-
-                    <StackLayout Spacing="10">
-
-                        <Label Text="Category:"
-                               FontAttributes="Italic"
-                               FontSize="20"/>
-                        <Label Text="{Binding CurrentQuestion.Category}"
-                               FontSize="20"
-                               Margin="0,10"/>
-
-                        <Label Text="Context:"
-                               FontAttributes="Italic"
-                               FontSize="20"/>
-                        <Label Text="{Binding CurrentQuestion.Context}"
-                               FontSize="20"/>
-
-                    </StackLayout>
-
-                </Border>
-
-            </Grid>
-
-        </VerticalStackLayout>
-
-    </ScrollView>
+        </ScrollView>
 
 </ContentPage> 
