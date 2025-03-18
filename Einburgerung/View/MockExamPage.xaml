@@ -85,7 +85,6 @@
                                         Grid.ColumnSpan="1"/>
 
                                 <Button Text="Select state and begin exam"
-                                        IsEnabled="{Binding IsNotBusy}"
                                         Style="{StaticResource CustomButton}"
                                         Grid.Column="1"
                                         Command="{Binding PrepareMockExamCommand}"/>
