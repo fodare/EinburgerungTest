@@ -76,13 +76,6 @@ namespace Einburgerung.ViewModel
             if (IsBusy)
                 return;
             IsBusy = true;
-            if (IsReachedEndOfQuestionList())
-            {
-                await Shell.Current.DisplayAlert("Info", $"Reached end of question list. Scored {AnsweredCorrectlyCount}/{MockQuestions.Count}.", "OK");
-                IsQuestionVisible = false;
-                IsBusy = false;
-                return;
-            }
             try
             {
                 if (CurrentQuestion?.Solution == selectedOption)
@@ -94,7 +87,13 @@ namespace Einburgerung.ViewModel
                 {
                     await _notificationService.SnakbarNotification($"Wrong. Correct answer is {CurrentQuestion?.Solution}");
                 }
-
+                if (IsReachedEndOfQuestionList())
+                {
+                    await Shell.Current.DisplayAlert("Info", $"Reached end of question list. Scored {AnsweredCorrectlyCount}/{MockQuestions.Count}.", "OK");
+                    IsQuestionVisible = false;
+                    IsBusy = false;
+                    return;
+                }
                 await Task.Delay(1500);
                 NextQuestion();
             }
@@ -148,7 +147,7 @@ namespace Einburgerung.ViewModel
 
         public bool IsReachedEndOfQuestionList()
         {
-            if (CurrentQuestion is null)
+            if (CurrentQuestion is null || CurrentQuestion?.Num == MockQuestions.Last().Num)
                 return true;
 
             return false;
