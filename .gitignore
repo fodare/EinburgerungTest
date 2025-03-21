@@ -387,3 +387,6 @@ temp
 # Applcation signing certificate / keystores.
 *.keystores
 *.keystore
+
+# Local configuration files
+local.config.txt
