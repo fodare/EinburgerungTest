@@ -383,3 +383,7 @@ snapshots-diff/
 temp
 .packages
 /src/Templates/.tempTemplateOutput
+
+# Applcation signing certificate / keystores.
+*.keystores
+*.keystore
