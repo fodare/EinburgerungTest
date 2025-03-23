@@ -1,8 +1,11 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Einburgerung", "Einburgerung\Einburgerung.csproj", "{527BEAAB-DD3D-3C68-871B-A1CC8278773F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EinburgerungTests", "EinburgerungTests\EinburgerungTests.csproj", "{421D5CB5-AEEB-4543-B0FF-C3FE3ABB3FF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +17,10 @@ Global
 		{527BEAAB-DD3D-3C68-871B-A1CC8278773F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{527BEAAB-DD3D-3C68-871B-A1CC8278773F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{527BEAAB-DD3D-3C68-871B-A1CC8278773F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421D5CB5-AEEB-4543-B0FF-C3FE3ABB3FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421D5CB5-AEEB-4543-B0FF-C3FE3ABB3FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421D5CB5-AEEB-4543-B0FF-C3FE3ABB3FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421D5CB5-AEEB-4543-B0FF-C3FE3ABB3FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
