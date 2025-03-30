@@ -42,7 +42,7 @@ jobs:
            working-directory: .
 
          - name: Build application
-           run: dotnet build -f $dotnet_version --no-restore
+           run: dotnet build --no-restore
            working-directory: .
 
          - name: Test
