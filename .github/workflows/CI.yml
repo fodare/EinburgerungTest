@@ -42,7 +42,8 @@ jobs:
            working-directory: .
 
          - name: Build application
-           run: dotnet build -c Release -f $dotnet_version --no-restore
+           run: dotnet build -f $dotnet_version --no-restore
+           working_directory: .
 
          - name: Test
            run: dotnet test --no-build --verbosity normal
