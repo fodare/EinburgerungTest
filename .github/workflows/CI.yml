@@ -54,7 +54,7 @@ jobs:
               gpg -d --passphrase "${{ secrets.GPG_PASSPHRASE }}" --batch einburgerung.keystore.asc > einburgerung.keystore
 
          - name: Build and sign application
-           run: dotnet build -c Release /p:AndroidSigningKeyStore=einburgerung.keystore /p:AndroidSigningKeyAlias=einburgerung /p:AndroidSigningKeyPass="${{secrets.KEYSTORE_PASSWORD}}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD}}" --no-restore
+           run: dotnet build Einburgerung/Einburgerung.csproj -c Release /p:AndroidSigningKeyStore=einburgerung.keystore /p:AndroidSigningKeyAlias=einburgerung /p:AndroidSigningKeyPass="${{secrets.KEYSTORE_PASSWORD}}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD}}" --no-restore
 
          - name: Upload build Artifact
            uses: actions/upload-artifact@v4.6.2
