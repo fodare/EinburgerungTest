@@ -47,3 +47,18 @@ jobs:
 
          - name: Test
            run: dotnet test --no-build --verbosity normal
+
+         - name: Setup keystore file
+           run: |
+              echo "${{ secrets.GPG_KEY_STORE }}" > einburgerung.keystore.asc
+              gpg -d --passphrase "${{ secrets.GPG_PASSPHRASE }}" --batch einburgerung.keystore.asc > einburgerung.keystore
+
+         - name: Build and sign application
+           run: dotnet build Einburgerung/Einburgerung.csproj -c Release /p:AndroidSigningKeyStore=einburgerung.keystore /p:AndroidSigningKeyAlias=$signing_key_alias /p:AndroidSigningKeyPass="${{secrets.KEYSTORE_PASSWORD}}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD}}" --no-restore
+
+         - name: Upload build artifacts
+           uses: actions/upload-artifact@v.3.1.0
+           with:
+              path: |
+                 ./**/.aab
+                 ./**/.apk
