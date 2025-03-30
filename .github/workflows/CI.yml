@@ -43,7 +43,7 @@ jobs:
 
          - name: Build application
            run: dotnet build -f $dotnet_version --no-restore
-           working_directory: .
+           working-directory: .
 
          - name: Test
            run: dotnet test --no-build --verbosity normal
