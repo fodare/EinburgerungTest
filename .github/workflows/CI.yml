@@ -52,7 +52,7 @@ jobs:
 
          - name: Build application
            run: dotnet build -c Release -f $dotnet_version --no-restore
-           working-directory: ./Einburgerung/Einburgerung.csproj
+           working-directory: Einburgerung/Einburgerung.csproj
 
          - name: Test
            run: dotnet test --no-build --verbosity normal
