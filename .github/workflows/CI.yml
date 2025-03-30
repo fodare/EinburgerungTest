@@ -37,22 +37,12 @@ jobs:
          - name: List installed MAUI workload(s)
            run: dotnet workload list
 
-         - name: Install OpenJDK 11
-           run: |
-              ubuntu_release=`lsb_release -rs`
-              wget https://packages.microsoft.com/config/ubuntu/${ubuntu_release}/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-              sudo dpkg -i packages-microsoft-prod.deb
-              sudo apt-get install apt-transport-https
-              sudo apt-get update
-              sudo apt-get install msopenjdk-11
-
          - name: Restore dependencies
            run: dotnet restore
            working-directory: .
 
          - name: Build application
            run: dotnet build -c Release -f $dotnet_version --no-restore
-           working-directory: /Einburgerung.csproj
 
          - name: Test
            run: dotnet test --no-build --verbosity normal
