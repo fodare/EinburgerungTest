@@ -1,3 +1,5 @@
+[![.NET](https://github.com/fodare/EinburgerungTest/actions/workflows/CI.yml/badge.svg)](https://github.com/fodare/EinburgerungTest/actions/workflows/CI.yml)
+
 # Introduction
 
 The Leben in Deutschland / Eiburgerung test can prove that you know the legal and social system and living conditions in Germany. This program is an offline Android application designed to help users prepare for the exam.
