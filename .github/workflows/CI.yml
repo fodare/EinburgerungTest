@@ -62,3 +62,11 @@ jobs:
               path: |
                  ./**/*.aab
                  ./**/*.apk
+                 
+         - name: Build & Publish Debug APK
+           uses: ShaunLWM/action-release-debugapk@0.0.7
+           with:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+             REPO_BRANCH: main
+          
+         
